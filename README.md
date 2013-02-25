@@ -17,15 +17,15 @@ At the moment this system requires:
 Installation:
 ============
 
-At the moment, write two files: .key and .token
+At the moment, write two files in the same folder you are running the script from: .fuser and .fpasswd
 
-They should contain the trello api developer key and token, respectively. Those can be found at:
+They should contain the foauth.org user and password, respectively. One should have activated the Trello foauth.org
+binding though:
 
-https://trello.com/1/appKey/generate#
+https://foauth.org/services/#trello-modal
 
-In the future that should not be necessary if one skips the OAuth step via foauth.org:
-
-https://github.com/gulopine/foauth.org/issues/18#issuecomment-14015475
+In essence foauth allows the developer to bypass the OAuth hassle by having a plain old HTTP Basic authentication
+instead of all the API key/token business.
 
 TODO:
 ====

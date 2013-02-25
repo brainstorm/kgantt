@@ -5,17 +5,16 @@ from datetime import datetime
 import requests
 import sys
 
+# FOauth.org credentials
+fuser = open(".fuser").read().rstrip()
+fpasswd = open(".fpasswd").read().rstrip()
 
-# Trello application developer key and token
-# Available from: https://trello.com/1/appKey/generate#
-key='key='+open(".key").read().rstrip()
-token='token='+open(".token").read().rstrip()
+foauth_prefix = 'https://foauth.org/'
+trello_url = foauth_prefix+'api.trello.com/1/members/me/boards'
+trello_card = foauth_prefix+'api.trello.com/1/cards/6MFWnC2r'
 
+r = requests.get(trello_card, auth=(fuser, fpasswd))
 
-trello_url = 'https://api.trello.com/1/members/me/boards'+'?'+key+'&'+token
-trello_card = 'https://api.trello.com/1/cards/6MFWnC2r'+'?'+key+'&'+token
-
-r = requests.get(trello_card)
 # "2013-02-28T07:00:00.000Z"
 due_date = r.json['due'].split('T')[0]
 
@@ -44,5 +43,3 @@ image = gc.get_image("test_gantt.png")
 #		isDone() method for cards.
 # XXX: Check checklist for each card and search for "Depends on" keyword.
 #	Potentially use: http://ipython.org/ipython-doc/dev/parallel/dag_dependencies.html
-# XXX: Check status of trello<->foauth.org support to bridge OAuth with HTTP Basic
-#	https://github.com/gulopine/foauth.org/issues/18#issuecomment-14015475
